@@ -1,0 +1,58 @@
+﻿@model AISLTP.Entities.User
+
+@{
+    ViewBag.Title = "Удаление пользователя";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Вы действительно хотите удалить запись?</h3>
+<div>
+    <h4>Пользователь</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Login)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LTP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LTP.Nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sotr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sotr.Fio)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" />
+            @Html.ActionLink("К списку", "Index")
+        </div>
+    }
+</div>

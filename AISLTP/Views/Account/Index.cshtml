@@ -1,0 +1,35 @@
+﻿@model AISLTP.Entities.Auth
+
+@{
+    ViewBag.Title = "Авторизация";
+    Layout = "~/Views/Shared/_Auth.cshtml";
+}
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h1>Авторизация</h1>
+        @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "alert alert-warning" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Login)
+            @Html.TextBoxFor(model => model.Login, new { @class = "form-control", style = "max-width: initial;" })
+            <small class="form-text text-danger">
+                @Html.ValidationMessageFor(model => model.Login)
+            </small>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password)
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control", style = "max-width: initial;" })
+            <small class="form-text text-danger">
+                @Html.ValidationMessageFor(model => model.Password)
+            </small>
+        </div>
+        <input type="submit" value="Авторизация" class="btn btn-primary">
+}
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

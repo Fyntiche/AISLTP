@@ -1,0 +1,51 @@
+﻿@model IEnumerable<AISLTP.Entities.User>
+
+@{
+    ViewBag.Title = "Список пользователей";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Добавить", "Create", new { }, new { @class = "btn btn-default btn-sm", title = "Добавить" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Login)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Role)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LTP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sotr)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Login)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Role.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LTP.Nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sotr.Fio)
+        </td>
+        <td class="text-right">
+            @Html.ActionLink("Изменить", "Edit", new { id=item.ID }, new { @class = "btn btn-default btn-sm", title = "Изменить" })
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ID }, new { @class = "btn btn-default btn-sm", title = "Удалить" })
+        </td>
+    </tr>
+}
+
+</table>

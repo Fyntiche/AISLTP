@@ -1,0 +1,65 @@
+﻿@model Lico
+@using AISLTP.Entities
+@{
+    ViewBag.Title = "Добавление информации";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <b><h2>@ViewBag.Fam @ViewBag.Ima @ViewBag.Otc:</h2></b>
+        <hr />
+        <h3>Отряды:</h3>
+
+        <div class="">
+            <ul>
+                @foreach (Otrad c in Model.Otrads)
+                {
+                    @:
+                    <b>ЛТП: </b> @c.LTP.Nom
+
+                    @:
+                    <b>Дата помещения: </b> @c.Date.ToShortDateString();
+
+                    @:
+                    <b>Номер отряда: </b> @c.NomOtr
+                    <br />
+                    @:
+                    <b>Примечание: </b> @c.Prim
+                    <br />
+                    @:
+                    <b>Должность начальника отряда: </b> @c.Dol
+
+                    @:
+                    <b>Звание начальника отряда: </b> @c.Zv
+                    <br />
+                    @:
+                    <b>Фамилия начальника отряда: </b> @c.Fam
+                    @:
+                    <b>Имя начальника отряда: </b> @c.Ima
+                    @:
+                    <b>Отчество начальника отряда: </b> @c.Otch
+                    <br />
+                    @:
+                    <b>Телефон начальника отряда: </b> @c.Tel
+
+                    <hr />
+                }
+            </ul>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Добавить информация", "CreateOtrad", "Otrads")<br />
+    @Html.ActionLink("Назад", "Index", "Otrads")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

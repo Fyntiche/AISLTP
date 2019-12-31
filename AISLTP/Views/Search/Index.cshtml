@@ -1,0 +1,104 @@
+﻿@model AISLTP.Entities.Search
+
+@{
+    ViewBag.Title = "Поиск осужденных";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-sm-3">
+        <h3>Условия поиска</h3>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="checkbox">
+                <label>
+                    @Html.EditorFor(model => model.UseFIO)
+                    @Html.DisplayNameFor(model => model.UseFIO)
+                </label>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.FIO, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.FIO, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <hr />
+            <div class="checkbox">
+                <label>
+                    @Html.EditorFor(model => model.UseDr)
+                    @Html.DisplayNameFor(model => model.UseDr)
+                </label>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DrAt, htmlAttributes: new { @class = "control-label" })
+                <input type="date" id="DrAt" name="DrAt" value="@String.Format("{0:yyyy-MM-dd}", Model.DrAt)" class="form-control" />
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DrTo, htmlAttributes: new { @class = "control-label" })
+                <input type="date" id="DrTo" name="DrTo" value="@String.Format("{0:yyyy-MM-dd}", Model.DrTo)" class="form-control" />
+            </div>
+            <hr />
+            <div class="checkbox">
+                <label>
+                    @Html.EditorFor(model => model.UseDosujd)
+                    @Html.DisplayNameFor(model => model.UseDosujd)
+                </label>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DosujdAt, htmlAttributes: new { @class = "control-label" })
+                <input type="date" id="DosujdAt" name="DosujdAt" value="@String.Format("{0:yyyy-MM-dd}", Model.DosujdAt)" class="form-control" />
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DosujdTo, htmlAttributes: new { @class = "control-label" })
+                <input type="date" id="DosujdTo" name="DosujdTo" value="@String.Format("{0:yyyy-MM-dd}", Model.DosujdTo)" class="form-control" />
+            </div>
+            <hr />
+            <div class="checkbox">
+                <label>
+                    @Html.EditorFor(model => model.UseDosv)
+                    @Html.DisplayNameFor(model => model.UseDosv)
+                </label>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DosvAt, htmlAttributes: new { @class = "control-label" })
+                <input type="date" id="DosvAt" name="DosvAt" value="@String.Format("{0:yyyy-MM-dd}", Model.DosvAt)" class="form-control" />
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DosvTo, htmlAttributes: new { @class = "control-label" })
+                <input type="date" id="DosvTo" name="DosvTo" value="@String.Format("{0:yyyy-MM-dd}", Model.DosvTo)" class="form-control" />
+            </div>
+            <hr />
+            <button type="submit" class="btn btn-default">Поиск</button>
+        }
+    </div>
+    <div class="col-sm-9">
+        <h3>Результаты поиска</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    Осужденный
+                </th>
+                <th>
+                    Дата рождения
+                </th>
+                <th></th>
+            </tr>
+            <tbody>
+                @foreach (var item in ViewBag.Items)
+                {
+                    <tr>
+                        <td>
+                            @item.Fam @item.Ima @item.Otc
+                        </td>
+                        <td>
+                            @item.Dr
+                        </td>
+                        <td>
+                            @Html.ActionLink("Просмотреть", "Details", "Licoes", new { id = item.ID }, new { @class = "btn btn-default btn-sm", title = "Просмотреть" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

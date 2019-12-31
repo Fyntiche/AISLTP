@@ -1,0 +1,40 @@
+﻿@model Lico
+@using AISLTP.Entities
+@{
+    ViewBag.Title = "Добавление информации";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <b><h2>@ViewBag.Fam @ViewBag.Ima @ViewBag.Otc:</h2></b>
+        <hr />
+        <h3>Участие в общественной жизни:</h3>
+
+        <div class="">
+            <ul>
+                @foreach (Obchest c in Model.Obchests)
+                {
+                    @:
+                <b>Участие в общественной жизни: </b> @c.Uch
+                    <br />
+                    <hr />
+                }
+            </ul>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Добавить информация", "CreateObchest", "Obchests")<br />
+    @Html.ActionLink("Назад", "Index", "Obchests")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

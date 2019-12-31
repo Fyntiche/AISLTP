@@ -1,0 +1,50 @@
+﻿@model IEnumerable<AISLTP.Entities.Message>
+
+@{
+    ViewBag.Title = "Сообщения пользователей";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Login)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsRead)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Login)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+        <td>
+            @if (item.IsRead)
+            { <span>Да</span> }
+            else
+            { <span>Нет</span> }
+        </td>
+        <td>
+            @Html.ActionLink("Просмотреть", "Details", new { id=item.ID }, new { @class = "btn btn-default btn-sm", title = "Просмотреть" })
+        </td>
+    </tr>
+}
+
+</table>

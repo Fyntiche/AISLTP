@@ -1,0 +1,58 @@
+﻿@model Lico
+@using AISLTP.Entities
+@{
+    ViewBag.Title = "Добавление информации";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <b><h2>@ViewBag.Fam @ViewBag.Ima @ViewBag.Otc:</h2></b>
+        <hr />
+        <h3>Информация о лице после освобождения:</h3>
+
+        <div class="">
+            <ul>
+                @foreach (Osv c in Model.Osvs)
+                {
+                    @:
+                <b>Дата освобождения: </b> @c.DateOsv.ToShortDateString()
+                @:
+                <b>Дата прибытия: </b> @c.DatePrib.ToShortDateString()
+                    <br />
+                    @:
+                    <b>Cотрудник контролировавший прибытие: </b> @c.Control
+                    <br />
+                @:
+                    <b>Имеется ли место жительства: </b> @c.Locat
+                    <br />
+                    @:
+                    <b>Необходимость доставки к дому: </b> @c.Dost
+                    <br />
+                @:
+                    <b>Информация о трудоустройстве после освобождения: </b> @c.Trud
+                    <br />
+                @:
+                    <b>Личная позиция лица о трудоустройсте после освобождения: </b> @c.Posic
+                    <br />
+
+                    <hr />
+                }
+            </ul>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Добавить информация", "CreateOsv", "Osvs")<br />
+    @Html.ActionLink("Назад", "Index", "Osvs")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

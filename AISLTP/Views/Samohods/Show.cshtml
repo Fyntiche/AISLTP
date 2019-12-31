@@ -1,0 +1,52 @@
+﻿@model Lico
+@using AISLTP.Entities
+@{
+    ViewBag.Title = "Добавление информации";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <b><h2>@ViewBag.Fam @ViewBag.Ima @ViewBag.Otc:</h2></b>
+        <hr />
+        <h3>Самовольное оставление ЛТП:</h3>
+
+        <div class="">
+            <ul>
+                @foreach (Samohod c in Model.Samohods)
+                {
+                    @:
+                <b>Дата побега: </b> @c.DateP.ToShortDateString()
+                    @:
+                    <b>Дата задержания: </b> @c.DateZ.ToShortDateString()
+                    <br />
+                @:
+                    <b>Ф.И.О. задержавшего сотрудника: </b> @c.FIO
+                    <br />
+                @:
+                    <b>Информация о побеге: </b> @c.Samovol.Txt
+                    <br />
+                @:
+                    <b>Примечание: </b> @c.Prim
+                    <br />
+
+                    <hr />
+                }
+            </ul>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Добавить информация", "CreateSamohod", "Samohods")<br />
+    @Html.ActionLink("Назад", "Index", "Samohods")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

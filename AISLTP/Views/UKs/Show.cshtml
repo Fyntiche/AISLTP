@@ -1,0 +1,77 @@
+﻿@model Lico
+@using AISLTP.Entities
+@{
+    ViewBag.Title = "Добавление осуждения лицу";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <b><h2>@ViewBag.Fam @ViewBag.Ima @ViewBag.Otc:</h2></b>
+        <hr />
+        <h3>Осуждения:</h3>
+
+        <div class="">
+            <ul>
+                @foreach (UK c in Model.UKs)
+                {
+                    @:
+                    <b>Пункт УК: </b> @c.Point
+
+                    @:
+                    <b>Часть УК: </b> @c.Part
+
+                    @:
+                    <b>Статья УК: </b> @c.Article
+
+                    @:
+                    <b>Название: </b> @c.Name
+                    <br />
+                    @:
+                    <b>Фабула: </b> @c.Fabula
+                    <br />
+                    @:
+                    <b>Примечания: </b> @c.Prim
+                    <br />
+
+                    @:
+                    <b>Дата вынесения приговора: </b> @c.DatePrig.ToShortDateString()
+                    <br />
+                    @:
+                    <b>Суд вынесший решение: </b> @c.Court.Name
+
+                    @:
+                    <b>Фамилия судьи: </b> @c.Fam
+
+                    @:
+                    <b>Имя судьи: </b> @c.Ima
+
+                    @:
+                    <b>Отчество: </b> @c.Otch
+                    <br />
+                    @:
+                    <b>Местро отбывания наказания: </b> @c.Location
+                    <br />
+                    @:
+                    <b>Имеется ли не снятая или непогашенная судимость?: </b> @c.Sudim
+
+                    <hr />
+                }
+            </ul>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Добавить осуждение", "CreateUK", "UKs")<br />
+    @Html.ActionLink("Назад", "Index", "UKs")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

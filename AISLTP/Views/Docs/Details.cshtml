@@ -1,0 +1,31 @@
+﻿@using AISLTP.Entities
+@model Lico
+@{
+    /**/
+
+    ViewBag.Title = "Details";
+}
+<br />
+<fieldset>
+    <legend>Информация о лице</legend>
+
+    <div class="display-field">
+        <h3>
+            @Html.DisplayFor(model => model.Fam)
+            @Html.DisplayFor(model => model.Ima)
+            @Html.DisplayFor(model => model.Otc)
+        </h3>
+    </div>
+
+    <div class="display-label"><b>Документы переданные при доставлении:</b></div>
+    <br />
+    <ul>
+        @foreach (Doc c in Model.Docs)
+        {
+            <li>@c.Txt</li>
+        }
+    </ul>
+</fieldset>
+<td>
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.ID })
+</td>

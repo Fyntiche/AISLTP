@@ -1,0 +1,58 @@
+﻿@model Lico
+@using AISLTP.Entities
+@{
+    ViewBag.Title = "Добавление информации";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <b><h2>@ViewBag.Fam @ViewBag.Ima @ViewBag.Otc:</h2></b>
+        <hr />
+        <h3>Обжалования:</h3>
+
+        <div class="">
+            <ul>
+                @foreach (Objal c in Model.Objals)
+                {
+                    @:
+                <b>Фамилия подавшего заявление: </b> @c.Fam
+                    <br />
+                @:
+                <b>Имя подавшего заявление: </b> @c.Ima
+                    <br />
+                @:
+                <b>Отчество подавшего заявление: </b> @c.Otch
+                     <br />
+                @:
+                <b>Телефон подавшего заявление: </b> @c.Tel
+
+                    @:
+                <b>Дата обжалования: </b> @c.Date.ToShortDateString()
+
+                    @:
+                    <b>Результат: </b> @c.Result
+                    <br />
+                    @:
+                    <b>Во время нахождения в ЛТП: </b> @c.Locat
+
+                    <hr />
+                }
+            </ul>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Добавить информация", "CreateObjal", "Objals")<br />
+    @Html.ActionLink("Назад", "Index", "Objals")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

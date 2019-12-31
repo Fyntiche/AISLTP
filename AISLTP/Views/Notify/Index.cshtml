@@ -1,0 +1,25 @@
+﻿@model IEnumerable<AISLTP.Entities.Notify>
+
+@{
+    ViewBag.Title = "Уведомления";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table table-striped">
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.Lico.Fam
+                    @item.Lico.Ima
+                    @item.Lico.Otc
+                    :
+                    @item.Content
+                    @Html.DisplayFor(model => item.Date)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

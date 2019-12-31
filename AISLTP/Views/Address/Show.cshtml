@@ -1,0 +1,52 @@
+﻿@model Lico
+@using AISLTP.Entities
+@{
+    ViewBag.Title = "Добавление адресов лицу";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    <b><h2>@ViewBag.Fam @ViewBag.Ima @ViewBag.Otc:</h2></b>
+    <hr />
+    <h3>Адреса:</h3>
+    <div class="">
+        <ul>
+            @foreach (Address c in Model.Addresses)
+    {
+        @:
+        <b>Область: </b> @c.Obl.Txt
+        @:
+        <b>Район:</b> @c.Rn.Txt
+        @:
+        <b>Населенный пункт:</b> @c.Np.Txt
+        @:
+        <b>Улица:</b> @c.Ul
+        @:
+        <b>Дом:</b> @c.Dom
+        @:
+        <b>Корпус:</b> @c.Korpus
+        @:
+        <b>Квартира</b> @c.Kvartira
+        @:
+        <b>Примечание</b> @c.Prim
+        <hr />
+}
+        </ul>
+    </div>
+</div>
+
+}
+
+<div>
+    @Html.ActionLink( "Добавить адрес" , "CreateAddress", "Address")<br />
+    @Html.ActionLink( "Назад" , "Index", "Address")
+</div>
+
+@section Scripts {
+    @Scripts.Render( "~/bundles/jqueryval" )
+}

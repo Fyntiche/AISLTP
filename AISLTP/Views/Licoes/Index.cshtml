@@ -1,0 +1,55 @@
+﻿@model IEnumerable<AISLTP.Entities.Lico>
+
+@{
+    ViewBag.Title = "Список лиц";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Список лиц:</h2>
+
+<p>
+    @Html.ActionLink("Создать новую запись", "Create")
+</p>
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Fam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ima)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Otc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Dr)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Fam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ima)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Otc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dr)
+        </td>
+
+        <td>
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Просмотреть", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+</table>

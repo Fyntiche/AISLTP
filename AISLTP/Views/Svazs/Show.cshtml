@@ -1,0 +1,56 @@
+﻿@model Lico
+@using AISLTP.Entities
+@{
+    ViewBag.Title = "Добавление информации";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <b><h2>@ViewBag.Fam @ViewBag.Ima @ViewBag.Otc:</h2></b>
+        <hr />
+        <h3>Социально полезные связи:</h3>
+
+        <div class="">
+            <ul>
+                @foreach (Svaz c in Model.Svazs)
+                {
+                    @:
+                    <b>Фамилия: </b> @c.Fam
+                    <br />
+                    @:
+                    <b>Имя: </b> @c.Ima
+                    <br />
+                    @:
+                    <b>Отчество: </b> @c.Otc
+                    <br />
+                    @:
+                    <b>Дата рождения: </b> @c.Dr.ToShortDateString()
+                    <br />
+                    @:
+                    <b>Вид связи: </b> @c.Vidsv.Txt
+                    <br />
+                    @:
+                    <b>Примечание: </b> @c.Prim
+                    <br />
+
+                    <hr />
+                }
+            </ul>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Добавить информация", "CreateSvaz", "Svazs")<br />
+    @Html.ActionLink("Назад", "Index", "Svazs")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

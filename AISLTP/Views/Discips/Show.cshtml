@@ -1,0 +1,45 @@
+﻿@model Lico
+@using AISLTP.Entities
+@{
+    ViewBag.Title = "Добавление информации";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <b><h2>@ViewBag.Fam @ViewBag.Ima @ViewBag.Otc:</h2></b>
+        <hr />
+        <h3>Дисциплинарные проступки:</h3>
+
+        <div class="">
+            <ul>
+                @foreach (Discip c in Model.Discips)
+    {
+            @:
+                <b>Дисциплинарный проступок: </b> @c.Dis
+            <br />
+            @:
+            <b>Дата совершения: </b> @c.Date.ToShortDateString()
+            <br />
+            @:
+            <b>Наказание: </b> @c.Nak
+            <br />
+            <hr />
+                }
+            </ul>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Добавить информацию", "CreateDiscips", "Discips")<br />
+    @Html.ActionLink("Назад", "Index", "Discips")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

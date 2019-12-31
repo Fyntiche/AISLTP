@@ -1,0 +1,40 @@
+﻿@using AISLTP.Entities
+@model Lico
+@{
+
+    ViewBag.Title = "Edit";
+}
+
+@using (Html.BeginForm())
+{
+    <br />
+    <fieldset>
+        <legend>Лицо</legend>
+
+        @Html.HiddenFor(model => model.ID)
+        @Html.HiddenFor(model => model.Fam)
+        @Html.HiddenFor(model => model.Ima)
+        @Html.HiddenFor(model => model.Otc)
+
+        <div class="display-field">
+            <h3>
+                @Html.DisplayFor(model => model.Fam)
+                @Html.DisplayFor(model => model.Ima)
+                @Html.DisplayFor(model => model.Otc)
+            </h3>
+        </div>
+
+        <div class="editor-label"><b>Документы переданные при доставлении</b></div>
+        <br />
+        @foreach (Doc c in ViewBag.Docs)
+        {
+            <input type="checkbox" name="selectedDocs" value="@c.ID"
+                   @(Model.Docs.Contains(c) ? "checked=\"checked\"" : "") />@c.Txt <br />
+            }
+
+        <p>
+                <br />
+            <input type="submit" value="Сохранить" />
+        </p>
+    </fieldset>
+}

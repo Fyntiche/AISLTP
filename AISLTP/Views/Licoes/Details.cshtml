@@ -1,0 +1,959 @@
+﻿@using AISLTP.Entities
+@model Lico
+
+@{
+    ViewBag.Title = "Информация о лицу";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Информация о лице (<b>@Model.Fam @Model.Ima @Model.Otc</b>):</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwentyFour">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyFour" aria-expanded="false" aria-controls="collapseTwentyFour">
+                        Рекомендации:
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwentyFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwentyFour">
+                <div class="panel-body">
+                    <ul>
+                        <li>Не направлять данное лицо на работы за пределы ЛТП в целях недопущения рецедива самовольного оставления ЛТП</li>
+                        <li>Направить его в Новогрудское ЛТП для наркоманов</li>
+                        <li>Направить его в отряд специализирующийся на медико-социальной реадаптации судимых лиц</li>
+                        <li>Недопускать предельное содержание в отряде таких лиц с неоднократным совершением дисциплинарных нарушений правил внутреннего режима ЛТП или административного правонарушения во время содержания в ЛТП</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Персональные данные
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-10">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Fam)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Fam)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Ima)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Ima)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Otc)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Otc)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Dr)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Dr)
+                                </dd>
+                                <hr />
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Pol.Txt)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Pol.Txt)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Nac.Txt)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Nac.Txt)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Vneshnost)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Vneshnost)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Pasport)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Pasport)
+                                </dd>
+                                <hr />
+                                <b><h4>Место рождения:</h4></b>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Obl.Txt)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Obl.Txt)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Rn.Txt)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Rn.Txt)
+                                </dd>
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Np.Txt)
+                                </dt>
+                                <dd>
+                                    @Html.DisplayFor(model => model.Np.Txt)
+                                </dd>
+                            </div>
+                            <div class="col-sm-2">
+                                @if (Model.Foto != null)
+                                {
+                                    @Html.Raw("<img class=\"img-responsive\" src=\"data:image/jpeg;base64," + Convert.ToBase64String(Model.Foto) + "\" />")
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Адреса:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Address c in Model.Addresses)
+                        {
+                            @:
+                            <b>Область: </b> @c.Obl.Txt
+                            @:
+                            <b>Район:</b> @c.Rn.Txt
+                            @:
+                            <b>Населенный пункт:</b> @c.Np.Txt
+                            @:
+                            <b>Улица:</b> @c.Ul
+                            @:
+                            <b>Дом:</b> @c.Dom
+                            @:
+                            <b>Корпус:</b> @c.Korpus
+                            @:
+                            <b>Квартира</b> @c.Kvartira
+                            @:
+                            <b>Примечание</b> @c.Prim
+                            <hr />
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingNine">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                            Образования:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseNine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNine">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Educ c in Model.Educs)
+                        {
+
+                            <li> @c.Txt</li>
+
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThree">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Профессии:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Prof c in Model.Profs)
+                        {
+
+                            <li> @c.Txt</li>
+
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingFour">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            Специальности:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Spec c in Model.Specs)
+                        {
+
+                            <li> @c.Txt</li>
+
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingFive">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            Осуждения:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (UK c in Model.UKs)
+                        {
+                            @:
+                            <b>Пункт УК: </b> @c.Point
+
+                            @:
+                            <b>Часть УК: </b> @c.Part
+
+                            @:
+                            <b>Статья УК: </b> @c.Article
+
+                            @:
+                            <b>Название: </b> @c.Name
+                            <br />
+                            @:
+                            <b>Фабула: </b> @c.Fabula
+                            <br />
+                            @:
+                            <b>Примечания: </b> @c.Prim
+                            <br />
+
+                            @:
+                            <b>Дата вынесения приговора: </b> @c.DatePrig.ToShortDateString()
+                            <br />
+                            @:
+                            <b>Суд вынесший решение: </b> @c.Court.Name
+
+                            @:
+                            <b>Фамилия судьи: </b> @c.Fam
+
+                            @:
+                            <b>Имя судьи: </b> @c.Ima
+
+                            @:
+                            <b>Отчество: </b> @c.Otch
+                            <br />
+                            @:
+                            <b>Местро отбывания наказания: </b> @c.Location
+                            <br />
+                            @:
+                            <b>Имеется ли не снятая или непогашенная судимость?: </b> @c.Sudim
+                            <hr />
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingSix">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            Правонарушения:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Koap c in Model.Koaps)
+                        {
+                            @:
+                            <b>Пункт КоАП: </b> @c.Point
+
+                            @:
+                            <b>Часть КоАП: </b> @c.Part
+
+                            @:
+                            <b>Статья КоАП: </b> @c.Article
+
+                            @:
+                            <b>Название: </b> @c.Name
+                            <br />
+                            @:
+                            <b>Фабула: </b> @c.Fabula
+                            <br />
+                            @:
+                            <b>Примечания: </b> @c.Prim
+                            <br />
+
+                            @:
+                            <b>Дата решения: </b> @c.DateRe.ToShortDateString()
+                            <br />
+                            @:
+                            <b>Суд вынесший решение: </b> @c.Court.Name
+
+                            @:
+                            <b>Фамилия судьи: </b> @c.Fam
+
+                            @:
+                            <b>Имя судьи: </b> @c.Ima
+
+                            @:
+                            <b>Отчество: </b> @c.Otch
+                            <br />
+                            @:
+                            <b>Вид административного взыскания: </b> @c.Vidvz
+
+                            <hr />
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingSeven">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                            Медицинские комиссии:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Medic c in Model.Medics)
+                        {
+                            @:
+                            <b>Медицинская комиссия: </b> @c.MedcomId
+
+                            @:
+                            <b>Дата: </b> @c.Date.ToShortDateString()
+
+                            @:
+                            <b>Результат: </b> @c.Result
+                            <br />
+                            @:
+                            <b>Фамилия врача: </b> @c.Fam
+
+                            @:
+                            <b>Имя врача: </b> @c.Ima
+
+                            @:
+                            <b>Отчество врача: </b> @c.Otch
+                            <br />
+                            <hr />
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTen">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                            Доставление/оформление лица:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTen">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Naprav c in Model.Napravs)
+                        {
+                            @:
+                            <b>Основания направления: </b> @c.Osnnap.Txt
+
+                            @:
+                            <b>Дата помещения в ЛТП: </b> @c.DataPom.ToShortDateString()
+                            <br />
+                            <br />
+                            @:
+                            <b>Фамилия сотрудника, доставивший лицо: </b> @c.FamD
+                            <br />
+                            @:
+                            <b>Имя сотрудника, доставившего лицо: </b> @c.ImaD
+                            <br />
+                            @:
+                            <b>Отчество сотрудника, доставившего лицо: </b> @c.OtcD
+                            <br />
+                            @:
+                            <b>Телефон сотрудника, доставившего лицо: </b> @c.TelD
+                            <br />
+                            <br />
+
+                            @:
+                            <b>Фамилия сотрудника, оформившего лицо: </b> @c.FamO
+                            <br />
+                            @:
+                            <b>Имя сотрудника, оформившего лицо: </b> @c.ImaO
+                            <br />
+                            @:
+                            <b>Отчество сотрудника, оформившего лицо: </b> @c.OtcO
+                            <br />
+                            @:
+                            <b>Телефон сотрудника, оформившего лицо: </b> @c.TelO
+                            <br />
+                            <hr />
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingEleven">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+                            Обжалования решения о направлении в ЛТП:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseEleven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEleven">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Objal c in Model.Objals)
+                        {
+                            @:
+                            <b>Фамилия подавшего заявление: </b> @c.Fam
+                            <br />
+                            @:
+                            <b>Имя подавшего заявление: </b> @c.Ima
+                            <br />
+                            @:
+                            <b>Отчество подавшего заявление: </b> @c.Otch
+                            <br />
+                            @:
+                            <b>Телефон подавшего заявление: </b> @c.Tel
+
+                            @:
+                            <b>Дата обжалования: </b> @c.Date.ToShortDateString()
+
+                            @:
+                            <b>Результат: </b> @c.Result
+                            <br />
+                            @:
+                            <b>Во время нахождения в ЛТП: </b> @c.Locat
+
+                            <hr />
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingEight">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                            Превентивные надзоры:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEight">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Privent c in Model.Privents)
+                        {
+                            @:
+                            <b>Дата установления: </b> @c.Data.ToShortDateString()
+
+                            @:
+                            <b>Срок: </b> @c.Srok
+                            <br />
+                            @:
+                            <b>Уголовно-исполнительная инспекция осуществляющая контроль: </b> @c.Inspec
+                            <br />
+
+                            @:
+                            <b>Фамилия ответственого сотрудника: </b> @c.Fam
+
+                            @:
+                            <b>Имя ответственого сотрудника: </b> @c.Ima
+
+                            @:
+                            <b>Отчество ответственого сотрудника: </b> @c.Otc
+                            <br />
+
+                            @:
+                            <b>Телефон ответственого сотрудника: </b> @c.Tel
+
+                            <hr />
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwelve">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
+                            Социально полезные связи:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwelve" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwelve">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Svaz c in Model.Svazs)
+                        {
+                            @:
+                            <b>Фамилия: </b> @c.Fam
+                            <br />
+                            @:
+                            <b>Имя: </b> @c.Ima
+                            <br />
+                            @:
+                            <b>Отчество: </b> @c.Otc
+                            <br />
+                            @:
+                            <b>Дата рождения: </b> @c.Dr.ToShortDateString()
+                            <br />
+                            @:
+                            <b>Вид связи: </b> @c.Vidsv.Txt
+                            <br />
+                            @:
+                            <b>Примечание: </b> @c.Prim
+                            <br />
+
+                            <hr />
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTvelve">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTvelve" aria-expanded="false" aria-controls="collapseTvelve">
+                            Отряды в ЛТП:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTvelve" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTvelve">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Otrad c in Model.Otrads)
+                        {
+                            @:
+                            <b>ЛТП: </b> @c.LTP.Nom
+
+                            @:
+                            <b>Дата помещения: </b> @c.Date.ToShortDateString();
+
+                        @:
+                        <b>Номер отряда: </b> @c.NomOtr
+                        <br />
+                        @:
+                        <b>Примечание: </b> @c.Prim
+                        <br />
+                        @:
+                        <b>Должность начальника отряда: </b> @c.Dol
+
+                        @:
+                        <b>Звание начальника отряда: </b> @c.Zv
+                        <br />
+                        @:
+                        <b>Фамилия начальника отряда: </b> @c.Fam
+                        @:
+                        <b>Имя начальника отряда: </b> @c.Ima
+                        @:
+                        <b>Отчество начальника отряда: </b> @c.Otch
+                        <br />
+                        @:
+                        <b>Телефон начальника отряда: </b> @c.Tel
+
+                        <hr />
+                }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThirteen">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen">
+                            Задолженности:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThirteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThirteen">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Debt c in Model.Debts)
+                        {
+                            @:
+                            <b>Вид задолженности: </b> @c.Viddebt.Txt
+                            @:
+                            <b>Сумма: </b> @c.Sum
+                            <br />
+
+                            <hr />
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingFriteen">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFriteen" aria-expanded="false" aria-controls="collapseFriteen">
+                            Трудовая деятельность до направления в ЛТП:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFriteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFriteen">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Work c in Model.Works)
+                        {
+                            @:
+                            <b>Место работы до направления в ЛТП: </b> @c.Job
+                            <br />
+                            @:
+                            <b>Занимаемая должность: </b> @c.Job
+
+                            <br />
+                            <hr />
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingFourteen">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFourteen" aria-expanded="false" aria-controls="collapseFourteen">
+                            Трудовая деятельность в ЛТП:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFourteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFourteen">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (WorkLTP c in Model.WorkLTPs)
+                        {
+                            @:
+                            <b>Отношение к труду: </b> @c.Otn
+                            <br />
+                            @:
+                            <b>Трудоустройство в ЛТП: </b> @c.Trud
+
+                            <br />
+                            <hr />
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingFifteen">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFifteen" aria-expanded="false" aria-controls="collapseFifteen">
+                            Зависимости:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFifteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFifteen">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Zavis c in Model.Zaviss)
+                        {
+                            @:
+                            <b>Зависимость: </b> @c.Zav
+                            <br />
+                            @:
+                            <b>Принятая мера: </b> @c.Prin
+
+                            <br />
+                            @:
+                            <b>Дата: </b> @c.Date.ToShortDateString()
+                            <br />
+                            <hr />
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingSixteen">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSixteen" aria-expanded="false" aria-controls="collapseSixteen">
+                            Информация врача-нарколога:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseSixteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSixteen">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Lechen c in Model.Lechens)
+                        {
+                            @:
+                            <b>Состоит у врача нарколога: </b> @c.Sost
+                            <br />
+                            @:
+                            <b>Принятая мера: </b> @c.Prin
+                            <br />
+                            @:
+                            <b>Дата: </b> @c.Date.ToShortDateString()
+                            <br />
+                            <hr />
+                    }
+                        </ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingSeventeen">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeventeen" aria-expanded="false" aria-controls="collapseSeventeen">
+                            Участие в общественной жизни ЛТП:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseSeventeen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeventeen">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Obchest c in Model.Obchests)
+                        {
+                            @:
+                            <b>Участие: </b> @c.Uch
+                            <br />
+                            <hr />
+                    }
+                        </ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingEighteen">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEighteen" aria-expanded="false" aria-controls="collapseEighteen">
+                            Отношение к лицам:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseEighteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEighteen">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Soderotnosh c in Model.Soderotnoshes)
+                        {
+                            @:
+                            <b>ФИО: </b> @c.Name
+                            <br />
+                            @:
+                            <b>Отношение: </b> @c.Otnosh.Txt
+                            <br />
+                            <hr />
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingNineteen">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseNineteen" aria-expanded="false" aria-controls="collapseNineteen">
+                            Мнение психолога:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseNineteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNineteen">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Psix c in Model.Psixes)
+                        {
+                            @:
+                            <b>Информация психолога: </b> @c.Psi
+                            <br />
+                            @:
+                            <b>Ф.И.О. психолога: </b> @c.Name
+                            <br />
+                            @:
+                            <b>Дата: </b> @c.Date.ToShortDateString()
+                            <br />
+                            <hr />
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwenty">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwenty" aria-expanded="false" aria-controls="collapseTwenty">
+                            Дисциплинарные проступки:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwenty" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwenty">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Discip c in Model.Discips)
+                        {
+                            @:
+                            <b>Дисциплинарный проступок: </b> @c.Dis
+                            <br />
+                            @:
+                            <b>Дата совершения: </b> @c.Date.ToShortDateString()
+                            <br />
+                            @:
+                            <b>Наказание: </b> @c.Nak
+                            <br />
+                            <hr />
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwentyOne">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyOne" aria-expanded="false" aria-controls="collapseTwentyOne">
+                            Самовольное оставление ЛТП:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwentyOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwentyOne">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Samohod c in Model.Samohods)
+                        {
+                            @:
+                            <b>Дата побега: </b> @c.DateP.ToShortDateString()
+                            @:
+                            <b>Дата задержания: </b> @c.DateZ.ToShortDateString()
+                            <br />
+                            @:
+                            <b>Ф.И.О. задержавшего сотрудника: </b> @c.FIO
+                            <br />
+                            @:
+                            <b>Информация о побеге: </b> @c.Samovol.Txt
+                            <br />
+                            @:
+                            <b>Примечание: </b> @c.Prim
+                            <br />
+
+                            <hr />
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwentyTwo">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyTwo" aria-expanded="false" aria-controls="collapseTwentyTwo">
+                            Документы переданные при доставлении:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwentyTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwentyTwo">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Doc c in Model.Docs)
+                        {
+                            <li>@c.Txt</li>
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwentyFri">
+                    <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyFri" aria-expanded="false" aria-controls="collapseTwentyFri">
+                            Информация о лице после освобождения из ЛТП:
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwentyFri" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwentyFri">
+                    <div class="panel-body">
+                        <ul>
+                            @foreach (Osv c in Model.Osvs)
+                        {
+                            @:
+                            <b>Дата освобождения: </b> @c.DateOsv.ToShortDateString()
+                            @:
+                            <b>Дата прибытия: </b> @c.DatePrib.ToShortDateString()
+                            <br />
+                            @:
+                            <b>Cотрудник контролировавший прибытие: </b> @c.Control
+                            <br />
+                            @:
+                            <b>Имеется ли место жительства: </b> @c.Locat
+                            <br />
+                            @:
+                            <b>Необходимость доставки к дому: </b> @c.Dost
+                            <br />
+                            @:
+                            <b>Информация о трудоустройстве после освобождения: </b> @c.Trud
+                            <br />
+                            @:
+                            <b>Личная позиция лица о трудоустройсте после освобождения: </b> @c.Posic
+                            <br />
+
+                            <hr />
+                    }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Назад", "Index")
+</p>

@@ -1,0 +1,56 @@
+﻿@model AISLTP.Entities.Lico
+
+@{
+    ViewBag.Title = "Удаление записи";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Удаление записи</h2>
+
+<h3>Вы действительно хотите удалить эту запись?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ima)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ima)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Otc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Otc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dr)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Назад", "Index")
+        </div>
+    }
+</div>

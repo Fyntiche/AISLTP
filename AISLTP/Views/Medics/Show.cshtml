@@ -1,0 +1,55 @@
+﻿@model Lico
+@using AISLTP.Entities
+@{
+    ViewBag.Title = "Добавление медицинской комиссии лицу";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <b><h2>@ViewBag.Fam @ViewBag.Ima @ViewBag.Otc:</h2></b>
+        <hr />
+        <h3>Осуждения:</h3>
+
+        <div class="">
+            <ul>
+                @foreach (Medic c in Model.Medics)
+                {
+                    @:
+                    <b>Медицинская комиссия: </b> @c.MedcomId
+
+                    @:
+                    <b>Дата: </b> @c.Date.ToShortDateString()
+
+                    @:
+                    <b>Результат: </b> @c.Result
+                    <br />
+                    @:
+                    <b>Фамилия врача: </b> @c.Fam
+
+                    @:
+                    <b>Имя врача: </b> @c.Ima
+
+                    @:
+                    <b>Отчество врача: </b> @c.Otch
+                    <br />
+                    <hr />
+                }
+            </ul>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Добавить медицинскую комиссию", "CreateMedic", "Medics")<br />
+    @Html.ActionLink("Назад", "Index", "Medics")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

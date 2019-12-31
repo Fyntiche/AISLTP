@@ -1,0 +1,44 @@
+﻿@model Lico
+@using AISLTP.Entities
+@{
+    ViewBag.Title = "Добавление информации";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <b><h2>@ViewBag.Fam @ViewBag.Ima @ViewBag.Otc:</h2></b>
+        <hr />
+        <h3>Трудовая деятельность в ЛТП:</h3>
+
+        <div class="">
+            <ul>
+                @foreach (WorkLTP c in Model.WorkLTPs)
+                {
+                    @:
+                <b>Отношение к труду в ЛТП: </b> @c.Otn
+                    <br />
+                    @:
+                <b>Трудоустройство в ЛТП: </b> @c.Trud
+
+                    <br />
+                    <hr />
+                }
+            </ul>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Добавить информацию", "CreateWorkLTP", "WorkLTPs")<br />
+    @Html.ActionLink("Назад", "Index", "WorkLTPs")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

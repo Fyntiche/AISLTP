@@ -1,0 +1,47 @@
+﻿@model Lico
+@using AISLTP.Entities
+@{
+    ViewBag.Title = "Добавление информации";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <b><h2>@ViewBag.Fam @ViewBag.Ima @ViewBag.Otc:</h2></b>
+        <hr />
+        <h3>Зависимости:</h3>
+
+        <div class="">
+            <ul>
+                @foreach (Zavis c in Model.Zaviss)
+    {
+            @:
+            <b>Зависимость: </b> @c.Zav
+            <br />
+            @:
+            <b>Принятая мера: </b> @c.Prin
+
+            <br />
+                @:
+            <b>Дата: </b> @c.Date.ToShortDateString()
+                    <br />
+            <hr />
+}
+            </ul>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Добавить информацию", "CreateZavis", "Zavis")<br />
+    @Html.ActionLink("Назад", "Index", "Zavis")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,60 @@
+﻿@model Lico
+@using AISLTP.Entities
+@{
+    ViewBag.Title = "Добавление превентивного надзора лицу";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <b><h2>@ViewBag.Fam @ViewBag.Ima @ViewBag.Otc:</h2></b>
+        <hr />
+        <h3>Превентивный надзор:</h3>
+
+        <div class="">
+            <ul>
+                @foreach (Privent c in Model.Privents)
+                {
+                    @:
+                <b>Дата установления превентивного надзора: </b> @c.Data.ToShortDateString()
+
+                    @:
+                <b>Срок превентивного надзора: </b> @c.Srok
+                    <br />
+                    @:
+                <b>Уголовно-исполнительная инспекция осуществляющая контроль: </b> @c.Inspec
+                    <br />
+
+                    @:
+                    <b>Фамилия ответственого сотрудника: </b> @c.Fam
+
+                    @:
+                    <b>Имя ответственого сотрудника: </b> @c.Ima
+
+                    @:
+                    <b>Отчество ответственого сотрудника: </b> @c.Otc
+                    <br />
+
+                    @:
+                    <b>Телефон: </b> @c.Tel
+
+                    <hr />
+                }
+            </ul>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Добавить превентивный надзор", "CreatePrivent", "Privents")<br />
+    @Html.ActionLink("Назад", "Index", "Privents")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

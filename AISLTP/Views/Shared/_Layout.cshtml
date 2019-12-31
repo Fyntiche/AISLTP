@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("АИС-ЛТП", "Index", "Home", new { }, new { @class = "navbar-brand" })
+        </div>
+        <div class="collapse navbar-collapse">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Поиск", "Index", "Search")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Журналы учета <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Журнал лиц", "Index", "Licoes") </li>
+                            <li>@Html.ActionLink("Журнал адресов", "Index", "Address") </li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Журнал осуждений", "Index", "UKs") </li>
+                            <li>@Html.ActionLink("Журнал правонарушений", "Index", "Koaps") </li>
+                            <li>@Html.ActionLink("Журнал образований", "Index", "Educs")</li>
+                            <li>@Html.ActionLink("Журнал профессий", "Index", "Profs")</li>
+                            <li>@Html.ActionLink("Журнал специальностей", "Index", "Specs")</li>
+                            <li>@Html.ActionLink("Журнал медицинских комиссий", "Index", "Medics")</li>
+                            <li>@Html.ActionLink("Журнал превентивных надзоров", "Index", "Privents")</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Журнал содержания ЛТП", "Index", "JournalLTP")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Вспомогательные журналы<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Справочники", "Index", "Sp")</li>
+                            @if (User.IsInRole("admin"))
+                            {
+                                <li>@Html.ActionLink("Сообщения", "Index", "Messages")</li>
+                                <li>@Html.ActionLink("Пользователи", "Index", "Users")</li>
+                            }
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Выйти", "Logout", "Account")</li>
+                    <li><a href="~/Notify" title="Уведомления"><span class="glyphicon glyphicon-warning-sign"></span></a></li>
+                </ul>
+                AISLTP.Entities.User user = AISLTP.StaticFunctions.GetUser(User.Identity.Name);
+                string userName = user.Login;
+                if (user.Sotr != null)
+                {
+                    userName = user.Sotr.Fio;
+                }
+                <p class="navbar-text navbar-right">[@userName]</p>
+            }
+            else
+            {
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Войти", "Index", "Account")</li>
+                </ul>
+            }
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>
+                &copy; @DateTime.Now.Year
+            </p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <button type="button" class="btn btn-danger" id="modalMessageButton" data-toggle="modal" data-target="#modalMessage" title="Сообщение администратору">
+            <span class="glyphicon glyphicon-bullhorn"></span>
+        </button>
+        <div class="modal fade" id="modalMessage" tabindex="-1" role="dialog" aria-labelledby="modalMessageLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="modalMessageLabel">Сообщение администратору</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="modalMessageContent">Содержание:</label>
+                            <textarea class="form-control" id="modalMessageContent" style="max-width: initial; min-height: 100px;"></textarea>
+                            <p class="help-block text-danger">Укажите текст сообщения</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                        <button type="button" class="btn btn-primary" id="modalMessageSend">
+                            <span class="glyphicon glyphicon-send"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Scripts.Render("~/bundles/mmessage");
+    }
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+﻿@model Lico
+@using AISLTP.Entities
+@{
+    ViewBag.Title = "Добавление правонарушения лицу";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <b><h2>@ViewBag.Fam @ViewBag.Ima @ViewBag.Otc:</h2></b>
+        <hr />
+        <h3>Правонарушения:</h3>
+
+        <div class="">
+            <ul>
+                @foreach (Koap c in Model.Koaps)
+                {
+                    @:
+                    <b>Пункт КоАП: </b> @c.Point
+
+                    @:
+                    <b>Часть КоАП: </b> @c.Part
+
+                    @:
+                    <b>Статья КоАП: </b> @c.Article
+
+                    @:
+                    <b>Название: </b> @c.Name
+                    <br />
+                    @:
+                    <b>Фабула: </b> @c.Fabula
+                    <br />
+                    @:
+                    <b>Примечания: </b> @c.Prim
+                    <br />
+
+                    @:
+                    <b>Дата решения: </b> @c.DateRe.ToShortDateString()
+                    <br />
+                    @:
+                    <b>Суд вынесший решение: </b> @c.Court.Name
+
+                    @:
+                    <b>Фамилия судьи: </b> @c.Fam
+
+                    @:
+                    <b>Имя судьи: </b> @c.Ima
+
+                    @:
+                    <b>Отчество: </b> @c.Otch
+                    <br />
+                    @:
+                    <b>Вид административного взыскания: </b> @c.Vidvz
+
+                    <hr />
+                }
+            </ul>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Добавить правонарушение", "CreateKoap", "Koaps")<br />
+    @Html.ActionLink("Назад", "Index", "Koaps")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

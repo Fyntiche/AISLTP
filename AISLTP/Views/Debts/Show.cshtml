@@ -1,0 +1,43 @@
+﻿@model Lico
+@using AISLTP.Entities
+@{
+    ViewBag.Title = "Добавление информации";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <b><h2>@ViewBag.Fam @ViewBag.Ima @ViewBag.Otc:</h2></b>
+        <hr />
+        <h3>Задолженности:</h3>
+
+        <div class="">
+            <ul>
+                @foreach (Debt c in Model.Debts)
+                {
+                    @:
+                <b>Вид задолженности: </b> @c.Viddebt.Txt
+                @:
+                <b>Сумма: </b> @c.Sum
+                    <br />
+
+                    <hr />
+                }
+            </ul>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Добавить информация", "CreateDebt", "Debts")<br />
+    @Html.ActionLink("Назад", "Index", "Debts")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

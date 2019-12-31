@@ -1,0 +1,74 @@
+﻿@model Lico
+@using AISLTP.Entities
+@{
+    ViewBag.Title = "Добавление информации";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        <b><h2>@ViewBag.Fam @ViewBag.Ima @ViewBag.Otc:</h2></b>
+
+        <div class="">
+            <ul>
+                @foreach (Naprav c in Model.Napravs)
+    {
+            @:
+            <b>Основания направления: </b> @c.Osnnap.Txt
+            <br />
+            @:
+            <b>ЛТП: </b> @c.LTP.Nom
+            <br />
+            @:
+            <b>Дата помещения в ЛТП: </b> @c.DataPom.ToShortDateString()
+            <br />
+            @:
+            <b>Предполагаемая дата освобождения: </b> @c.DataOsv.ToShortDateString()
+            <br />
+            <br />
+            @:
+            <b>Фамилия сотрудника, доставивший лицо: </b> @c.FamD
+            <br />
+            @:
+            <b>Имя сотрудника, доставившего лицо: </b> @c.ImaD
+            <br />
+            @:
+            <b>Отчество сотрудника, доставившего лицо: </b> @c.OtcD
+            <br />
+            @:
+            <b>Телефон сотрудника, доставившего лицо: </b> @c.TelD
+            <br />
+            <br />
+
+            @:
+            <b>Фамилия сотрудника, оформившего лицо: </b> @c.FamO
+            <br />
+            @:
+            <b>Имя сотрудника, оформившего лицо: </b> @c.ImaO
+            <br />
+            @:
+            <b>Отчество сотрудника, оформившего лицо: </b> @c.OtcO
+            <br />
+            @:
+            <b>Телефон сотрудника, оформившего лицо: </b> @c.TelO
+            <br />
+            <hr />
+}
+            </ul>
+        </div>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Добавить данные", "CreateNaprav", "Napravs")<br />
+    @Html.ActionLink("Назад", "Index", "Napravs")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
